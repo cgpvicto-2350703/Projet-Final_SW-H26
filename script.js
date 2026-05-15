@@ -7,6 +7,7 @@ import BibliothequeRouter from './src/routes/bibliotheque.route.js';
 import KeyRouter from './src/routes/CleApi.route.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
 
 
 
@@ -20,6 +21,7 @@ const app = express();
 const PORT = 3000;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use(cors());
 app.use(express.static(__dirname));
 app.use(express.json()); 
 app.use('/api/bibliotheque', authentification, BibliothequeRouter);
