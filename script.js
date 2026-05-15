@@ -5,6 +5,8 @@ import fs from 'fs';
 import authentification from './src/middlewares/authentification.middleware.js';
 import BibliothequeRouter from './src/routes/bibliotheque.route.js';
 import KeyRouter from './src/routes/CleApi.route.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 
 
@@ -17,6 +19,8 @@ const swaggerOptions = {customCss: '.swagger-ui .topbar { display: none }', cust
 const app = express();
 const PORT = 3000;
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use(express.static(__dirname));
 app.use(express.json()); 
 app.use('/api/bibliotheque', authentification, BibliothequeRouter);
 app.use('/api/authentification', KeyRouter);
@@ -24,6 +28,6 @@ app.use('/api/docs',swaggerUi.serve,swaggerUi.setup(swaggerDocument, swaggerOpti
 
 
 
-app.get('/', (req, res) => {res.send("<h1>Serveur de la biblihothèque!</h1>");});
+app.get('/', (req, res) => {res.sendFile(path.join(__dirname, 'index.html'));});
 
 app.listen(PORT, () => {console.log(`Serveur démarré sur le port ${PORT}`);});
