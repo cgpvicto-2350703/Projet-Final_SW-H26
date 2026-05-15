@@ -1,5 +1,5 @@
 // Configuration de l'URL de base de votre API
-const API_URL = 'https://projet-final-sw-h26.onrender.com/'; // Ajustez le port si nécessaire
+const API_URL = 'https://projet-final-sw-h26.onrender.com'; // Ajustez le port si nécessaire
 
 document.addEventListener('DOMContentLoaded', () => {
     
