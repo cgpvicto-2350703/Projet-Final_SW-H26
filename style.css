@@ -1,3 +1,4 @@
+/* Code emprunté. Source : https://gemini.google.com/u/1/app/3d414d5499ef807e?pageId=none */
 html, body 
 {
     height: 100%;
@@ -90,3 +91,4 @@ input[type="text"],input[type="email"],input[type="password"]
     background-color: #333;
     transform: scale(1.02);
 }
+/*Fin du code emprunté */

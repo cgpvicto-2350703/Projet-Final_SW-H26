@@ -1,4 +1,4 @@
-// Configuration de l'URL de base de votre API
+//Code inspiré. Source : https://gemini.google.com/u/1/app/3d414d5499ef807e?pageId=none
 const API_URL = 'https://projet-final-sw-h26.onrender.com/api/authentification'; // Ajustez le port si nécessaire
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,3 +81,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// Fin du code inspiré
