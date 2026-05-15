@@ -20,7 +20,7 @@
             "description": "Serveur de développement"
         },
         {
-            "url": "http://api.bibliotheque.ca",
+            "url": "https://projet-final-sw-h26.onrender.com/",
             "description": "Serveur en ligne"
         }],
     "paths":
