@@ -1,6 +1,7 @@
 {
-  "name": "projet-final",
+  "name": "Projet-Final",
   "version": "1.0.0",
+  "type": "module",
   "main": "script.js",
   "scripts": {
     "start": "nodemon script.js"
@@ -11,7 +12,9 @@
   "dependencies": {
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "pg": "^8.20.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

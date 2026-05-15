@@ -1,0 +1,1457 @@
+
+{
+    "openapi" : "3.1.0",
+    "info" : 
+    { 
+        "title": "Projet-Final",
+        "summary": "Une courte description de ce que fait votre API",
+        "description": "Une description plus détaillé de ce que fait votre API",
+        "contact": 
+        {
+            "name": "API Support",
+            "url": "https://www.example.com/support",
+            "email": "2350703@carrefour.cegepvicto.ca"
+        },
+        "version": "1.0.1"
+    },
+        "servers" :[
+        {
+            "url": "http://localhost:3000/",
+            "description": "Serveur de développement"
+        },
+        {
+            "url": "http://api.bibliotheque.ca",
+            "description": "Serveur en ligne"
+        }],
+    "paths":
+    {
+        "/":
+        {
+            "get": 
+            {
+                "summary": "Message de bienvenue",
+                "tags": ["Accueil"],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne un message de bienvenue",
+                        "content": 
+                        {
+                            "text/html": 
+                            {
+                                "example": "<h1>Serveur de la biblihothèque!</h1>"
+                            }
+                        }
+                    }
+                }
+            }    
+        },
+        "/api//bibliotheque/livre":
+        {
+            "get":
+            {
+                "description": "Retourne la liste des livres",
+                "summary": "Liste des livres",
+                "tags": [ "livres" ],
+                "parameters": [
+                {
+                    "in": "query",
+                    "name": "tous",
+                    "description": "seulment les livres disponible ou tous les livres",
+                    "schema": 
+                    {
+                        "type": "bool",
+                        "enum": [ true,false]
+                    },
+                    "required": false
+                }],
+                "responses":
+                {
+                    "200": 
+                    {
+                        "description": "Retourne la liste des livres",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "id": 
+                                        {
+                                            "type": "int",
+                                            "example": "1"
+                                        },
+                                        "titre": 
+                                        {
+                                            "type": "string",
+                                            "example": "Le Mythe de Sisyphe"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            },
+            "post": 
+            {
+                "summary": "Ajouter un livre",
+                "tags": ["livres"],
+                "description": "Ajouter une salutation en fournissant un titre, un auteur, un isbn, et un id de biblihothèque",
+                "requestBody": 
+                {
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "type": "object",
+                                "properties": 
+                                {
+                                    "titre": 
+                                    {
+                                        "type": "string",
+                                        "example": "Le Mythe de Sisyphe"
+                                    },
+                                    "auteur": 
+                                    {
+                                        "type": "string",
+                                        "example": "Albert Camus"
+                                    },
+                                    "isbn": 
+                                    {
+                                        "type": "int",
+                                        "example": "9782070322886"
+                                    },
+                                    "id biblihothèque":
+                                    {
+                                        "type":"int",
+                                        "example":"1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Livre ajouté avec succès",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Livre ajouté avec succès"
+                                        },
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"31"
+                                        },                                        
+                                        "id biblihothèque":
+                                        {
+                                            "type":"int",
+                                            "example":"1"
+                                        },
+                                        "titre": 
+                                        {
+                                            "type": "string",
+                                            "example": "Le Mythe de Sisyphe"
+                                        },
+                                        "auteur": 
+                                        {
+                                            "type": "string",
+                                            "example": "Albert Camus"
+                                        },
+                                        "isbn": 
+                                        {
+                                            "type": "int",
+                                            "example": "9782070322886"
+                                        },
+                                        "date_ajout": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-14T04:00:00.000Z"
+                                        },
+                                        "disponible": 
+                                        {
+                                            "type": "BOOLEAN",
+                                            "example": "true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, Le titre du livre est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }    
+            }
+        },
+        "/api//bibliotheque/livre/{id}" : 
+        {
+            "get": 
+            {
+                "description": "Retourne les details d'un livre a partire d'un id ",
+                "summary": "récuperer un livre",
+                "tags": [ "livres" ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id du livre",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "exemple" : "1"
+                        }
+                    }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne le livre",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"31"
+                                        },                                        
+                                        "id biblihothèque":
+                                        {
+                                            "type":"int",
+                                            "example":"1"
+                                        },
+                                        "titre": 
+                                        {
+                                            "type": "string",
+                                            "example": "Le Mythe de Sisyphe"
+                                        },
+                                        "auteur": 
+                                        {
+                                            "type": "string",
+                                            "example": "Albert Camus"
+                                        },
+                                        "isbn": 
+                                        {
+                                            "type": "int",
+                                            "example": "9782070322886"
+                                        },
+                                        "date_ajout": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-14T04:00:00.000Z"
+                                        },
+                                        "disponible": 
+                                        {
+                                            "type": "BOOLEAN",
+                                            "example": "true"
+                                        },
+                                        "prets":
+                                        {
+                                            "type": "prets",
+                                            "example": "listes des prets de ce livre"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "404": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, L'id du livre est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            },
+            "delete":
+            {
+                "summary": "supprime un livre",
+                "tags": ["livres"],
+                "description": "suprime un livre a partire de l'id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id du livre",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "exemple" : "1"
+                        }
+                    }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "le livre a ete supprimer",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "le livre a ete supprimer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, Lid du livre est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }    
+            }
+        },
+        "/api/bibliotheque/livre/statut/modifier/{id}":
+        {
+            "patch":
+            {
+                "description": "modifie le statut d'un livre ",
+                "summary": "modifie le satut d'un livre",
+                "tags": [ "livres" ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id du livre",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "exemple" : "1"
+                        }
+                    }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne le livre modifier",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message":
+                                        {
+                                            "type":"string",
+                                            "example":"Statut modifié"
+                                        },
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"31"
+                                        },                                        
+                                        "id biblihothèque":
+                                        {
+                                            "type":"int",
+                                            "example":"1"
+                                        },
+                                        "titre": 
+                                        {
+                                            "type": "string",
+                                            "example": "Le Mythe de Sisyphe"
+                                        },
+                                        "auteur": 
+                                        {
+                                            "type": "string",
+                                            "example": "Albert Camus"
+                                        },
+                                        "isbn": 
+                                        {
+                                            "type": "int",
+                                            "example": "9782070322886"
+                                        },
+                                        "date_ajout": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-14T04:00:00.000Z"
+                                        },
+                                        "disponible": 
+                                        {
+                                            "type": "BOOLEAN",
+                                            "example": "true"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "404": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, L'id du livre est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        },
+        "/api/bibliotheque/livre/modifier/{id}":
+        {
+            "patch":
+            {
+                "description": "modifie un livre ",
+                "summary": "modifie un livre",
+                "tags": [ "livres" ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id du livre",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "exemple" : "1"
+                        }
+                    }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne le livre modifier",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message":
+                                        {
+                                            "type":"string",
+                                            "example":"livre modifié"
+                                        },
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"31"
+                                        },                                        
+                                        "id biblihothèque":
+                                        {
+                                            "type":"int",
+                                            "example":"1"
+                                        },
+                                        "titre": 
+                                        {
+                                            "type": "string",
+                                            "example": "Le Mythe de Sisyphe"
+                                        },
+                                        "auteur": 
+                                        {
+                                            "type": "string",
+                                            "example": "Albert Camus"
+                                        },
+                                        "isbn": 
+                                        {
+                                            "type": "int",
+                                            "example": "9782070322886"
+                                        },
+                                        "date_ajout": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-14T04:00:00.000Z"
+                                        },
+                                        "disponible": 
+                                        {
+                                            "type": "BOOLEAN",
+                                            "example": "true"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "404": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, L'id du livre est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        },
+
+        "/api/bibliotheque/pret":
+        {
+            "get":
+            {
+                "description": "Retourne la liste de toutes les prets",
+                "summary": "Liste des prets",
+                "tags": [ "prets" ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne la liste des prets",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"3"
+                                        },                                        
+                                        "livre_id":
+                                        {
+                                            "type":"int",
+                                            "example":"4"
+                                        },
+                                        "emprunter": 
+                                        {
+                                            "type": "string",
+                                            "example": "Thomas Marceau"
+                                        },
+                                        "date_retour": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-12T04:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            },
+            "post":
+            {
+                "summary": "Ajouter un pret",
+                "tags": ["prets"],
+                "description": "Ajouter un pret en fournissant un id de livre, un emprunter, une date de retour",
+                "requestBody": 
+                {
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "type": "object",
+                                "properties": 
+                                {                                      
+                                    "livre_id":
+                                    {
+                                        "type":"int",
+                                        "example":"4"
+                                    },
+                                    "emprunter": 
+                                    {
+                                        "type": "string",
+                                        "example": "Thomas Marceau"
+                                    },
+                                    "date_retour": 
+                                    {
+                                        "type": "DATE",
+                                        "example": "2026-05-12T04:00:00.000Z"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "prets ajouté avec succès",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Livre ajouté avec succès"
+                                        },
+                                    "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"3"
+                                        },                                        
+                                        "livre_id":
+                                        {
+                                            "type":"int",
+                                            "example":"4"
+                                        },
+                                        "emprunter": 
+                                        {
+                                            "type": "string",
+                                            "example": "Thomas Marceau"
+                                        },
+                                        "date_retour": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-12T04:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, Le titre du livre est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }    
+            }
+        },
+        "/api/bibliotheque/pret/{id}":
+        {
+            "delete":
+            {
+                "summary": "supprime un pret",
+                "tags": ["prets"],
+                "description": "suprime un pret a partire de l'id",
+                "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "description": "Id du pret",
+                    "required": true,
+                    "schema": 
+                    {
+                        "type": "integer",
+                        "format": "int32",
+                        "exemple" : "1"
+                    }
+                }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "le pret a ete supprimer",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "le pret a ete supprimer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, L'id' du pret est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }   
+            },
+           "patch":
+            {
+                "description": "modifie un pret ",
+                "summary": "modifie un pret",
+                "tags": [ "prets" ],
+                "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "description": "Id du pret",
+                    "required": true,
+                    "schema": 
+                    {
+                        "type": "integer",
+                        "format": "int32",
+                        "exemple" : "1"
+                    }
+                }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne le pret modifier",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message":
+                                        {
+                                            "type":"string",
+                                            "example":"pret modifié"
+                                        },
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"3"
+                                        },                                        
+                                        "livre_id":
+                                        {
+                                            "type":"int",
+                                            "example":"4"
+                                        },
+                                        "emprunter": 
+                                        {
+                                            "type": "string",
+                                            "example": "Thomas Marceau"
+                                        },
+                                        "date_retour": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-12T04:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "404": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, L'id du pret est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        },
+        "/api/bibliotheque/pret/statut/{id}":
+        {
+            "patch":
+            {
+                "description": "modifie le statut d'un pret",
+                "summary": "modifie le satut d'un pret",
+                "tags": [ "prets" ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id du pret",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "exemple" : "1"
+                        }
+                    }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Retourne le pret modifier",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message":
+                                        {
+                                            "type":"string",
+                                            "example":"Statut modifié"
+                                        },
+                                        "id": 
+                                        {
+                                            "type":"int",
+                                            "example":"3"
+                                        },                                        
+                                        "livre_id":
+                                        {
+                                            "type":"int",
+                                            "example":"4"
+                                        },
+                                        "emprunter": 
+                                        {
+                                            "type": "string",
+                                            "example": "Thomas Marceau"
+                                        },
+                                        "date_retour": 
+                                        {
+                                            "type": "DATE",
+                                            "example": "2026-05-12T04:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }    
+                        }
+                    },
+                    "404": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, L'id du prets est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        },
+
+        "/api/authentification/user":
+        {
+            "post":
+            {
+                "summary": "Ajouter une utilisateur",
+                "tags": ["authentification"],
+                "description": "Ajouter un utilisateur en fournissant un titre, un auteur, un isbn, et un id de bibliothèque",
+                "requestBody": 
+                {
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "type": "object",
+                                "properties": 
+                                {
+                                    "nom": 
+                                    {
+                                        "type": "string",
+                                        "example": "Bibliothèque Centrale"
+                                    },
+                                    "courriel": 
+                                    {
+                                        "type": "string",
+                                        "example": "contact@biblio.ca"
+                                    },
+                                    "cle_api": 
+                                    {
+                                        "type": "string",
+                                        "example": "api_key_12345"
+                                    },
+                                    "password":
+                                    {
+                                        "type":"string",
+                                        "example":"hash_password_sec"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "la bibliothèque ajouté avec succès",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "la bibliothèque ajouté avec succès"
+                                        },
+                                        "id":
+                                        {
+                                            "type": "int",
+                                            "example": "1"
+                                        },
+                                        "nom": 
+                                        {
+                                            "type": "string",
+                                            "example": "Bibliothèque Centrale"
+                                        },
+                                        "courriel": 
+                                        {
+                                            "type": "string",
+                                            "example": "contact@biblio.ca"
+                                        },
+                                        "cle_api": 
+                                        {
+                                            "type": "string",
+                                            "example": "api_key_12345"
+                                        },
+                                        "password":
+                                        {
+                                            "type":"string",
+                                            "example":"hash_password_sec"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": 
+                    {
+                        "description": "Erreur de paramètres manquants",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur, Le nom de la bibliothèque est obligatoire." 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }   
+            }
+        },
+        "/api/authentification/cle/recuperer":
+        {
+            "post":
+            {
+                "summary": "Récupérer la cle api de lutilisateur",
+                "tags": ["authentification"],
+                "description": "Récupérer la cle api ou recrer la cle api en fonction du parametre newkey",
+                "parameters": [
+                {
+                    "in": "query",
+                    "name": "newkey",
+                    "description": "si on souhaite ou non une nouvelle cle",
+                    "schema": 
+                    {
+                        "type": "bool",
+                        "enum": [ true,false]
+                    },
+                    "required": false
+                }],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "cle récupérée avec succès",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "cle_api": 
+                                        {
+                                            "type":"string",
+                                            "example": "f94a9b50-5d69-4af8-9897-cd9acdbd1318"
+                                        }
+                                }
+                            }
+                        }
+                    },
+                    "500" : 
+                    {
+                        "description": "Erreur serveur",
+                        "content": 
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "type": "object",
+                                    "properties": 
+                                    {
+                                        "message": 
+                                        {
+                                            "type": "string",
+                                            "example": "Erreur serveur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+            }
+        }
+    }    
+}

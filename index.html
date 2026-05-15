@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Épreuve finale - Services Web H26</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Épreuve finale - Services Web H26</h1>
+            <p class="student-name">Nom de l'élève</p>
+        </header>
+
+        <main class="grid-container">
+            <section class="form-section">
+                <h2>Création d'une bibliothèque</h2>
+                <form id="create-library-form">
+                    <div class="form-group">
+                        <label for="lib-name">Nom de la bibliothèque</label>
+                        <input type="text" id="lib-name" placeholder="Votre bibliothèque">
+                    </div>
+                    <div class="form-group">
+                        <label for="lib-email">Courriel</label>
+                        <input type="email" id="lib-email" placeholder="Votre courriel">
+                    </div>
+                    <div class="form-group">
+                        <label for="lib-password">Mot de passe</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="lib-password" placeholder="********">
+                            <span class="toggle-password">👁️</span>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="btn">Créer</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="form-section divider">
+                <h2>Récupération d'une clé api</h2>
+                <form id="api-key-form">
+                    <div class="form-group">
+                        <label for="api-email">Courriel</label>
+                        <input type="email" id="api-email" placeholder="Votre courriel">
+                    </div>
+                    <div class="form-group">
+                        <label for="api-password">Mot de passe</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="api-password" placeholder="********">
+                            <span class="toggle-password">👁️</span>
+                        </div>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="new-key">
+                        <label for="new-key">Générer une nouvelle clé</label>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="btn">Récupérer</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="user.js"></script>
+</body>
+</html>
